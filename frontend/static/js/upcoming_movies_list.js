@@ -11,11 +11,22 @@ upcoming_movies_vue = new Vue({
 		let url = new URL(url_string);
 		this.page_number = url.searchParams.get("page") ? url.searchParams.get("page") : '1';
 
-		axios.get("/api/get_upcoming_movies?page="+this.page_number)
+		request_url = "/api/get_upcoming_movies?page="+this.page_number
+		if(url.searchParams.get("search_q"))
+			request_url = "/api/get_upcoming_movies_search?search_q="+url.searchParams.get("search_q")
+
+		axios.get(request_url)
 		.then(response => {
+			$('.loading img').hide();
 			this.movies = response.data.movies;
 			this.total_pages = response.data.total_pages;
-			this.render_pagination();
+			if(this.total_pages > 1)
+				this.render_pagination();
+		});
+
+		$("#search-btn").click(function(){
+			let search_q = $("input[name='search_movie']").val()
+			window.location.href = "/search/?search_q="+search_q
 		});
 	},
 	methods: {

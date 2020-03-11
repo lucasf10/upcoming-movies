@@ -9,14 +9,20 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 
 def get_upcoming_movies(request):
 	page_number = request.GET.get('page') or '1'
-
-	print(page_number)
-
 	response = requests.get("http://api.themoviedb.org/3/movie/upcoming?api_key="+TMDB_KEY+"&page="+page_number+"&region=US")
-
-	movies_data = get_useful_movies_data(response.json().get('results'))
+	raw_movie_data = response.json().get('results')
 	total_pages = response.json().get("total_pages")
 
+	movies_data = get_useful_movies_data(raw_movie_data)
+	
+	return JsonResponse({'movies': movies_data, 'total_pages': total_pages}, status=200)
+
+def get_upcoming_movies_search(request):
+	raw_movie_data = search_movie_by_title(request.GET.get('search_q'))
+	total_pages = '1'
+
+	movies_data = get_useful_movies_data(raw_movie_data)
+	
 	return JsonResponse({'movies': movies_data, 'total_pages': total_pages}, status=200)
 
 def get_movie_detail(request, movie_id):
@@ -26,8 +32,22 @@ def get_movie_detail(request, movie_id):
 
 	return JsonResponse({'movie_detail_data': movie_detail_data}, status=200)
 
-def get_upcoming_movies_total_pages(request):
-	response = requests.get("http://api.themoviedb.org/3/movie/"+str(movie_id)+"?api_key="+TMDB_KEY)
+def get_all_pages_upcoming_movies():
+	response = requests.get("http://api.themoviedb.org/3/movie/upcoming?api_key="+TMDB_KEY+"&region=US")
+	total_pages = int(response.json().get("total_pages"))
+	total_results = response.json().get('results')
+
+	if total_pages > 1:
+		for page in range(2, total_pages+1):
+			response = requests.get("http://api.themoviedb.org/3/movie/upcoming?api_key="+TMDB_KEY+"&region=US&page="+str(page))
+			total_results += response.json().get('results')
+
+	return total_results
+
+def search_movie_by_title(title):
+	full_upcoming_list = get_all_pages_upcoming_movies()
+	movies_found = [movie_data for movie_data in full_upcoming_list if movie_data['title'].find(title) != -1]
+	return movies_found
 
 def get_movie_genres():
 	genres_list = requests.get("http://api.themoviedb.org/3/genre/movie/list?api_key="+TMDB_KEY)
@@ -37,7 +57,7 @@ def get_useful_movies_data(raw_movie_data):
 	movies_data = []
 
 	genres_name = get_movie_genres()
-
+	print(raw_movie_data)
 	for movie in raw_movie_data:
 		movies_data.append(
 			{

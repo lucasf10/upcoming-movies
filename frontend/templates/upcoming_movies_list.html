@@ -8,6 +8,13 @@
 	<hr>
 	<div id="upcoming_movies_app">
 		<div class="movies_list">
+			<div class="col-md-12 search-wrapper">
+				<input placeholder="Looking for a movie?" type="text" name="search_movie">
+				<button id="search-btn"><span class="glyphicon glyphicon-search"></span></button>
+			</div>
+			<div class="loading col-md-12">
+				<img src="{% static 'img/loading.gif' %}">
+			</div>
 			<div class="col-md-3" v-for="movie in movies">
 				<div class="movies-item" :style="{backgroundImage: `url(${movie.poster_path})`}">
 					<a :href=`detail/${movie.id}`>

@@ -83,24 +83,51 @@ h1{
     align-items: center;
 }
 
+.pagination{
+	padding-right: 0;
+}
+
 .pagination ul li{
 	float: left;
 	margin: 0px 5px;
 }
-.pagination ul li:last{
+
+.pagination ul li:last-child{
 	margin-right: 0px; 
 }
-.pagination ul li:first{
+
+.pagination ul li:first-child{
 	margin-left: 0px; 
 }
+
 .pagination ul li a{
 	color: #000;
 }
+
 .pagination ul li a:hover{
 	text-decoration: none;
 	font-weight: 700;
 }
+
 .pagination .active{
 	font-weight: 700;
 	font-size: 16px;
+}
+
+.search-wrapper{
+	margin-bottom: 20px;
+	display: flex;
+    justify-content: center;
+}
+
+.search-wrapper input[type="text"]{
+	padding: 2px;
+}
+
+.loading{
+	text-align: center;
+}
+
+.loading img{
+	width: 60px;
 }
