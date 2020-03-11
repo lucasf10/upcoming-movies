@@ -74,3 +74,33 @@ h1{
 .movies-detail .poster-wrapper img{
 	max-width: 100%;
 }
+
+.pagination ul{
+	list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination ul li{
+	float: left;
+	margin: 0px 5px;
+}
+.pagination ul li:last{
+	margin-right: 0px; 
+}
+.pagination ul li:first{
+	margin-left: 0px; 
+}
+.pagination ul li a{
+	color: #000;
+}
+.pagination ul li a:hover{
+	text-decoration: none;
+	font-weight: 700;
+}
+.pagination .active{
+	font-weight: 700;
+	font-size: 16px;
+}

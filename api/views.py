@@ -15,8 +15,9 @@ def get_upcoming_movies(request):
 	response = requests.get("http://api.themoviedb.org/3/movie/upcoming?api_key="+TMDB_KEY+"&page="+page_number+"&region=US")
 
 	movies_data = get_useful_movies_data(response.json().get('results'))
+	total_pages = response.json().get("total_pages")
 
-	return JsonResponse({'movies': movies_data}, status=200)
+	return JsonResponse({'movies': movies_data, 'total_pages': total_pages}, status=200)
 
 def get_movie_detail(request, movie_id):
 	response = requests.get("http://api.themoviedb.org/3/movie/"+str(movie_id)+"?api_key="+TMDB_KEY)
@@ -24,6 +25,9 @@ def get_movie_detail(request, movie_id):
 	movie_detail_data = get_useful_movie_detail_data(response.json())
 
 	return JsonResponse({'movie_detail_data': movie_detail_data}, status=200)
+
+def get_upcoming_movies_total_pages(request):
+	response = requests.get("http://api.themoviedb.org/3/movie/"+str(movie_id)+"?api_key="+TMDB_KEY)
 
 def get_movie_genres():
 	genres_list = requests.get("http://api.themoviedb.org/3/genre/movie/list?api_key="+TMDB_KEY)
