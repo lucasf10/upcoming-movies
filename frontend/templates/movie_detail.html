@@ -3,7 +3,30 @@
 
 {% block content %}
 	<div id="movie_detail_app">
-		[[ movie_data ]]
+		<h1>
+			[[ movie_data.title ]]
+		</h1>
+		<hr>
+		<div class="row movies-detail">
+			<div class="col-md-6 poster-wrapper">
+				<img :src=`http://image.tmdb.org/t/p/w780${movie_data.poster_path}`>
+			</div>
+			<div class="col-md-6">
+				<p>
+					<b>Overview:</b> [[ movie_data.overview ]]
+				</p>
+
+				<p>
+					<b>Genres:</b> <template v-for="(genre, index) in movie_data.genres">[[ genre ]]<template v-if="index != movie_data.genres.length - 1">, </template> </template>
+				</p>
+
+				<p>
+					<b>Release Date:</b> [[ movie_data.release_date ]]
+				</p>
+
+				<a href="/">Back to Upcoming Movies List</a>
+			</div>
+		</div>
 	</div>
 {% endblock %}
 

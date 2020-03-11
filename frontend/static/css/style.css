@@ -32,7 +32,7 @@ h1{
 }
 
 .movie-info{
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.6);
     color: white;
     padding: 10px;
     position: absolute;
@@ -60,4 +60,17 @@ h1{
 .release-date{
 	font-weight: 700;
     font-style: italic;
+}
+
+.movies-detail{
+	padding-bottom: 30px;
+}
+
+.movies-detail p {
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.movies-detail .poster-wrapper img{
+	max-width: 100%;
 }
