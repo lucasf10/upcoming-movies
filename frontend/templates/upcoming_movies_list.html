@@ -9,7 +9,7 @@
 	<div id="upcoming_movies_app">
 		<div class="movies_list">
 			<div class="col-md-3" v-for="movie in movies">
-				<div class="movies-item" :style="{backgroundImage: `url(http://image.tmdb.org/t/p/w342${movie.poster_path})`}">
+				<div class="movies-item" :style="{backgroundImage: `url(${movie.poster_path})`}">
 					<a :href=`detail/${movie.id}`>
 						<div class="movie-info">
 							<p class="movie-title">[[ movie.title ]]</p>

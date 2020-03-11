@@ -9,7 +9,7 @@
 		<hr>
 		<div class="row movies-detail">
 			<div class="col-md-6 poster-wrapper">
-				<img :src=`http://image.tmdb.org/t/p/w780${movie_data.poster_path}`>
+				<img v-if="movie_data.poster_path" :src=`${movie_data.poster_path}`>
 			</div>
 			<div class="col-md-6">
 				<p>
