@@ -14,8 +14,12 @@ def get_upcoming_movies(request):
 
 	return JsonResponse({'movies': movies_data}, status=200)
 
-def get_upcoming_movies_total_pages(request):
-	response = requests.get("")
+def get_movie_detail(request, movie_id):
+	response = requests.get("http://api.themoviedb.org/3/movie/"+str(movie_id)+"?api_key="+TMDB_KEY)
+
+	movie_detail_data = get_useful_movie_detail_data(response.json())
+
+	return JsonResponse({'movie_detail_data': movie_detail_data}, status=200)
 
 def get_movie_genres():
 	genres_list = requests.get("http://api.themoviedb.org/3/genre/movie/list?api_key="+TMDB_KEY)
@@ -36,5 +40,16 @@ def get_useful_movies_data(raw_movie_data):
 				'release_date': movie.get('release_date')
 			}
 		)
+
+	return movies_data
+
+def get_useful_movie_detail_data(raw_movie_detail_data):
+	movies_data =  {
+		'title': raw_movie_detail_data.get('title'),
+		'poster_path': raw_movie_detail_data.get('poster_path'),
+		'genres': [genre['name'] for genre in raw_movie_detail_data.get('genres')],
+		'release_date': raw_movie_detail_data.get('release_date'),
+		'overview': raw_movie_detail_data.get('overview')
+	}
 
 	return movies_data

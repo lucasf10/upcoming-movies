@@ -2,10 +2,29 @@
 {% load static %}
 
 {% block content %}
+	<h1>
+		Upcoming Movies
+	</h1>
+	<hr>
 	<div id="upcoming_movies_app">
-		[[ movies ]]
+		<div class="movies_list">
+			<div class="col-md-3" v-for="movie in movies">
+				<div class="movies-item" :style="{backgroundImage: `url(http://image.tmdb.org/t/p/w342${movie.poster_path})`}">
+					<a :href=`detail/${movie.id}`>
+						<div class="movie-info">
+							<p class="movie-title">[[ movie.title ]]</p>
+							<div class="movie-genres">
+								<span class="genre" v-for="(genre, index) in movie.genres">
+									[[ genre ]]<template v-if="index != movie.genres.length - 1">,</template>
+								</span>
+							</div>
+							<span class="release-date"><i>[[ movie.release_date ]]</i></span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
 	</div>
-	<span>Blaa</span>
 {% endblock %}
 
 {% block scripts %}

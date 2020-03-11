@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<div id="movie_detail_app">
+		[[ movie_data ]]
+	</div>
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript">
+		let movie_id = {{ movie_id }};
+	</script>
+	<script type="text/javascript" src="{% static 'js/movie_detail.js' %}"></script>
+{% endblock %}
