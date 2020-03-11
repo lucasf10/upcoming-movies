@@ -57,7 +57,7 @@ def get_useful_movies_data(raw_movie_data):
 	movies_data = []
 
 	genres_name = get_movie_genres()
-	print(raw_movie_data)
+
 	for movie in raw_movie_data:
 		movies_data.append(
 			{
