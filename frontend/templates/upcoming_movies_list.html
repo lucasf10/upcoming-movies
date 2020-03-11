@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<div id="upcoming_movies_app">
+		[[ movies ]]
+	</div>
+	<span>Blaa</span>
+{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript" src="{% static 'js/upcoming_movies_list.js' %}"></script>
+{% endblock %}
