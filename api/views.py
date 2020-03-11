@@ -46,7 +46,7 @@ def get_all_pages_upcoming_movies():
 
 def search_movie_by_title(title):
 	full_upcoming_list = get_all_pages_upcoming_movies()
-	movies_found = [movie_data for movie_data in full_upcoming_list if movie_data['title'].find(title) != -1]
+	movies_found = [movie_data for movie_data in full_upcoming_list if movie_data['title'].lower().find(title.lower()) != -1]
 	return movies_found
 
 def get_movie_genres():
