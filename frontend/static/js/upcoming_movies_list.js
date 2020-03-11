@@ -5,6 +5,7 @@ upcoming_movies_vue = new Vue({
   		movies: [],
   		total_pages: null,
   		page_number: null,
+  		search_version: false,
   	},
   	mounted() {
   		let url_string = window.location.href;
@@ -12,8 +13,10 @@ upcoming_movies_vue = new Vue({
 		this.page_number = url.searchParams.get("page") ? url.searchParams.get("page") : '1';
 
 		request_url = "/api/get_upcoming_movies?page="+this.page_number
-		if(url.searchParams.get("search_q"))
-			request_url = "/api/get_upcoming_movies_search?search_q="+url.searchParams.get("search_q")
+		if(url.searchParams.get("search_q")){
+			request_url = "/api/get_upcoming_movies_search?search_q="+url.searchParams.get("search_q");
+			this.search_version = true;
+		}
 
 		axios.get(request_url)
 		.then(response => {
