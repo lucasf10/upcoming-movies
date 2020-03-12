@@ -20,9 +20,9 @@ If you wish to run this on your local machine you should follow:
 
 1. Clone this repo and navigate to its folder using the terminal.
 2. Create a virtual environment, activate it and install the requirements:
-  1. Create it by ` python3 -m venv myvenv `
-  2. Activate it by ` . myvenv/bin/activate `
-  3. Install or upgrade pip by ` python3 get-pip.py `
-  4. Install the requirements by ` pip install -r requirements.txt `
+    1. Create it by ` python3 -m venv myvenv `
+    2. Activate it by ` . myvenv/bin/activate `
+    3. Install or upgrade pip by ` python3 get-pip.py `
+    4. Install the requirements by ` pip install -r requirements.txt `
 3. Run the server: ` ./manage.py runserver`
 4. Open your browser, go to ` 127.0.0.1:8000 ` and you should see the app running.
